@@ -55,7 +55,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="Robot: Auto Drive On A Roll", group="Robot")
-@Disabled
+//@Disabled
 public class RobotAutoDriveByTime_Linear extends LinearOpMode {
 
     /* Declare OpMode members. */
