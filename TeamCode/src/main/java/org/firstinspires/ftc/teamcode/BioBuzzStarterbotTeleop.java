@@ -55,8 +55,8 @@ public class BioBuzzStarterbotTeleop extends OpMode {
     public final int LAUNCHER_TARGET_VELOCITY = 2000;
     public final int LAUNCHER_MIN_VELOCITY = 1900;
 
-    public final int LAUNCHER_TARGET_NECTAR_VELOCITY = 1800;
-    public final int LAUNCHER_MIN_NECTAR_VELOCITY = 1700;
+    public final int LAUNCHER_TARGET_NECTAR_VELOCITY = 1000;
+    public final int LAUNCHER_MIN_NECTAR_VELOCITY = 900;
 
     /*
      * These two variables store the power we need to apply to the motors. In other cases, we may
