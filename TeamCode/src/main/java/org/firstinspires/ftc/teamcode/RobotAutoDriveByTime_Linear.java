@@ -71,8 +71,8 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
     static final double     FORWARD_SPEED = 0.6;
     static final double     TURN_SPEED    = 0.5;
 
-    public final int LAUNCHER_TARGET_VELOCITY = 1600;
-    public final int LAUNCHER_MIN_VELOCITY = 1580;
+    public final int LAUNCHER_TARGET_VELOCITY = 1550;
+    public final int LAUNCHER_MIN_VELOCITY = 1530;
 
 
     @Override
@@ -99,11 +99,11 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
 
         // Step through each leg of the path, ensuring that the OpMode has not been stopped along the way.
 
-        while (opModeIsActive() && (runtime.seconds() < 10)) {
+        while (opModeIsActive() && (runtime.seconds() < 15)) {
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
 
             if (launcher.getVelocity() > LAUNCHER_MIN_VELOCITY) {
-                windmillServo.setPower(1);
+                windmillServo.setPower(-1);
             }
         }
 
@@ -112,7 +112,7 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
         leftDrive.setPower(FORWARD_SPEED);
         rightDrive.setPower(FORWARD_SPEED);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.5)) {
+        while (opModeIsActive() && (runtime.seconds() < 0.5)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
