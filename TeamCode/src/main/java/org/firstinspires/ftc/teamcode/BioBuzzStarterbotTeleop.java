@@ -41,6 +41,7 @@ public class BioBuzzStarterbotTeleop extends OpMode {
     private CRServo leftIntakeServo = null;
     private CRServo rightIntakeServo = null;
     private CRServo windmillServo = null;
+    private CRServo WinFlagServo = null;
 
     /*
      * These two variables are used to control the velocity of the launcher motor.
@@ -87,6 +88,7 @@ public class BioBuzzStarterbotTeleop extends OpMode {
         windmillServo = hardwareMap.get(CRServo.class, "windmill");
         leftIntakeServo = hardwareMap.get(CRServo.class, "left_intake_servo");
         rightIntakeServo = hardwareMap.get(CRServo.class, "right_intake_servo");
+        WinFlagServo = hardwareMap.get(CRServo.class, deviceName:"Win_Flag_Servo");
 
         /*
          * To drive forward, most robots need the motor on one side to be reversed,
