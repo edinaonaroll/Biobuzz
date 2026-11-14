@@ -32,7 +32,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /*
@@ -61,12 +63,17 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
     /* Declare OpMode members. */
     private DcMotor         leftDrive   = null;
     private DcMotor         rightDrive  = null;
-
+    private DcMotorEx launcher = null;
+    private CRServo windmillServo = null;
     private ElapsedTime     runtime = new ElapsedTime();
 
 
     static final double     FORWARD_SPEED = 0.6;
     static final double     TURN_SPEED    = 0.5;
+
+    public final int LAUNCHER_TARGET_VELOCITY = 1550;
+    public final int LAUNCHER_MIN_VELOCITY = 1530;
+
 
     @Override
     public void runOpMode() {
@@ -74,6 +81,8 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
         // Initialize the drive system variables.
         leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        launcher = hardwareMap.get(DcMotorEx.class, "launcher");
+        windmillServo = hardwareMap.get(CRServo.class, "windmill");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
@@ -90,11 +99,20 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
 
         // Step through each leg of the path, ensuring that the OpMode has not been stopped along the way.
 
+        while (opModeIsActive() && (runtime.seconds() < 15)) {
+            launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
+
+            if (launcher.getVelocity() > LAUNCHER_MIN_VELOCITY) {
+                windmillServo.setPower(-1);
+            }
+        }
+
+
         // Step 1:  Drive forward for 3 seconds
         leftDrive.setPower(FORWARD_SPEED);
         rightDrive.setPower(FORWARD_SPEED);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.5)) {
+        while (opModeIsActive() && (runtime.seconds() < 0.5)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
