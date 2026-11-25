@@ -98,7 +98,7 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
         waitForStart();
 
         // Step through each leg of the path, ensuring that the OpMode has not been stopped along the way.
-
+        runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 15)) {
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
 
